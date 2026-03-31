@@ -11,7 +11,7 @@ on:
 concurrency: preview-${{ github.ref }}
 
 jobs:
-  build-website:
+  build-and-deploy-website:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,17 +26,10 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: "./built-website"
-  deploy-preview:
-    needs: build-website
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: github-pages
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
-            source-dir: ./built-website/
+            source-dir: ./built-website
             preview-branch: master
             umbrella-dir: chapter/pr-preview
             pages-base-path: chapter
