@@ -1,7 +1,14 @@
-name: Build the website
+name: Build and deploy a preview website
 
 on:
   pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
 
 jobs:
   build-website:
@@ -19,3 +26,14 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: "./built-website"
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+            source-dir: ./built-website/
+            preview-branch: master
+            umbrella-dir: chapter/pr-preview
+            pages-base-path: chapter
+            qr-code: true
