@@ -27,6 +27,7 @@ jobs:
         with:
           path: "./built-website"
   deploy-preview:
+    needs: build-website
     runs-on: ubuntu-latest
     steps:
       - name: Deploy preview
