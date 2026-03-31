@@ -30,7 +30,7 @@ jobs:
         uses: rossjrw/pr-preview-action@v1
         with:
             source-dir: ./built-website
-            preview-branch: master
+            preview-branch: gh-pages
             umbrella-dir: chapter/pr-preview
             pages-base-path: chapter
             qr-code: true
