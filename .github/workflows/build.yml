@@ -30,6 +30,9 @@ jobs:
     needs: build-website
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: github-pages
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
